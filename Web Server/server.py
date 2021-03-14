@@ -6,20 +6,25 @@ NUM_LISTEN = 5
 SIZE = 1024 * 1024
 FORMAT = 'utf-8'
 
+
 def createSocket(port):
 	s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 	s.bind((HOST, port))
 	s.listen(5)
-	return s;
+	return s
+
 
 def receive(Client):
 	return Client.recv(SIZE).decode(FORMAT)
 
+
 def isGET(packet):
 	return 'GET' in packet
 
+
 def isPOST(packet):
 	return 'POST' in packet
+
 
 def isVideo(path):
 	return '.png' in path or '.jpg' in path or '.ico' in path or '.mp4' in path
@@ -27,6 +32,7 @@ def isVideo(path):
 
 def isDocument(path):
 	return '.docx' in path or '.pptx' in path or '.xlsx' in path or '.pdf' in path or '.txt' in path or '.pub' in path
+
 
 def createHeader(path):
 	filename = ''
@@ -36,6 +42,7 @@ def createHeader(path):
 	header = readHeader.read()
 	readHeader.close()
 	return header
+
 
 def response(path, Client):
 	header = createHeader(path)
@@ -52,19 +59,21 @@ def response(path, Client):
 		client.sendall(bytes(send, FORMAT))
 		file_data.close()
 
+
 def handleGET(packet, Client):
 	path = packet.split('\n')[0].split(' ')[1]
 	if path == '/' : path = './index.html'
 	else: path = '.' + path
 	response(path, Client)
 
+
 def handlePOST(packet, Client):
 	if not isPOST(packet) or 'Username=admin&Password=admin' not in packet: response('./404.html', Client)
 	else: response('./info.html', Client)
 
 
-
 print('waiting for connection...')
+
 
 while True:
 	s = createSocket(PORT)
