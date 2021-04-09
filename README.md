@@ -9,6 +9,7 @@
 
 <h3> Game Bang Bang Chiu: sản phẩm thứ hai </h3>
   - Đây là link demo đồ án, các bạn có thể tham khảo để lấy ý tưởng: https://youtu.be/VJLg0CzoGVs.
+  
   - Đây là link video mà tôi đã tham khảo để thực hiện đồ án: https://youtu.be/k1JGvJU707k.
 
 
